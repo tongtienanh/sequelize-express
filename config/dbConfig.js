@@ -1,7 +1,7 @@
 module.exports = {
-    HOST:'localhost',
+    HOST:'vh_db',
     USER:'root',
-    PASSWORD:'',
+    PASSWORD:'123456',
     DB:'my-app',
     dialect:'mysql',
     pool: {

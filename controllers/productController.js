@@ -7,7 +7,9 @@ const Review = db.review
 //create product
 
 
-const addProduct = async(res,req) => {
+const addProduct = async(req,res) => {
+    console.log(req.body.title,'title')
+
     let info = {
         title:req.body.title,
         price:req.body.price,
@@ -16,7 +18,7 @@ const addProduct = async(res,req) => {
     }
     try{
         const product = await Product.create(info)
-    res.status(200).send(product)
+        res.status(200).json(product)
 
     }
     catch(err){
@@ -26,9 +28,18 @@ const addProduct = async(res,req) => {
 
 // get all product
 
-const getAllProduct = async(res,req)=>{
-    const products = await Product.findAll({})
-    res.status(200).send(products)
+const getAllProduct = async(req,res)=>{
+    console.log(Product,'Product aaaaa')
+    try{
+        const products = await Product.findAll()
+        console.log(products,'products');
+        res.status(200).json(products)
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err.message)
+    }
+    
 }
 
 // get a product
@@ -50,10 +61,25 @@ const updateProduct = async(req,res)=>{
     res.status(200).send(product)
 }
 
+const deleteProduct = async(req,res)=>{
+    let id = req.params.id
+    try{
+        const product = await Product.destroy({
+            where:{
+                id:id
+            }
+        })
+        res.send('xoa thanh cong')
+    }
+    catch(err){
+        console.log(err.message)
+    }
+}
 
 module.exports = {
     addProduct,
     getAllProduct,
     getOneProduct,
-    updateProduct
+    updateProduct,
+    deleteProduct
 }

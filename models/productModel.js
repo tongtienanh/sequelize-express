@@ -1,3 +1,4 @@
+// const db = require('../config/dbConfig')
 module.exports = (sequelize,DataType) =>{
     const Product = sequelize.define('product',{
         title:{
@@ -14,5 +15,6 @@ module.exports = (sequelize,DataType) =>{
             type:DataType.BOOLEAN
         }
     })
+    // db.sync()
     return Product
 }

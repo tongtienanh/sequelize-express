@@ -1,6 +1,6 @@
 const dbConfig = require('../config/dbConfig')
 
-const {Sequelize,DataType} = require('sequelize')
+const {Sequelize} = require('sequelize')
 
 const sequelize = new Sequelize(
     dbConfig.DB,
@@ -21,8 +21,9 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
-db.product = require('./productModel.js')
-db.review = require('./reviewModel.js')
+db.product = require("./productModel.js")(sequelize, Sequelize.DataTypes);
+db.review = require("./productModel.js")(sequelize, Sequelize.DataTypes);
+db.user = require("./usersModel.js")(sequelize, Sequelize.DataTypes);
 
 //db.sequelize.sync({force:false})
 
