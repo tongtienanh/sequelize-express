@@ -1,11 +1,15 @@
 'use strict';
-
 module.exports = {
   async up (queryInterface, Sequelize) {
     const transaction = await queryInterface.sequelize.transaction();
     try {
       await queryInterface.createTable('users', {
-        id:Sequelize.DataTypes.INTEGER,
+        id:{
+          type:Sequelize.DataTypes.INTEGER,
+          autoIncrement:true,
+          allowNull: false,
+          primaryKey:true,
+        },
         userName: Sequelize.DataTypes.STRING,
         password: Sequelize.DataTypes.STRING,
         isBetaMember: {
@@ -19,12 +23,6 @@ module.exports = {
       await transaction.rollback();
       throw err;
     }
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
   },
 
   async down (queryInterface, Sequelize) {
@@ -36,11 +34,5 @@ module.exports = {
       await transaction.rollback();
       throw err;
     }
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
   }
 };

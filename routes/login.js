@@ -1,10 +1,11 @@
 const loginController = require('../controllers/loginController')
 const authencationMiddlesware = require('../middlesware/authencation')
+const loginValidate = require('../middlesware/loginValidate')
 const router = require('express').Router()
 router.get('/home',authencationMiddlesware.authencation,(req,res)=>{
-    res.json('dang nhap thanh cong')
+    res.json(req.user);
 })
-router.post('/login',loginController.checkLogin)
+router.post('/login',loginValidate,loginController.checkLogin)
 router.post('/register',loginController.register)
 // router.get('/get-all-product',productController.getAllProduct)
 // router.get('/:id',productController.getOneProduct)
